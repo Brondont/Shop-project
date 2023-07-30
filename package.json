@@ -30,9 +30,10 @@
     "nodemailer": "^6.9.3",
     "nodemailer-mailgun-transport": "^2.1.5",
     "pdfkit": "^0.13.0",
+    "pug": "^3.0.2",
     "sequelize": "^6.32.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.1"
   }
 }
