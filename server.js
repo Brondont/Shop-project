@@ -48,7 +48,6 @@ app.set("view engine", "pug");
 app.set("views", "views");
 
 app.use(helmet());
-app.use(compression());
 
 app.use(cookieParser("secret"));
 app.use(express.urlencoded({ extended: false }));
