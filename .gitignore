@@ -3,3 +3,4 @@ images/
 data/
 nodemon.json
 *.log
+.env
