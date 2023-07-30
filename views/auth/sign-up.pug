@@ -1,0 +1,29 @@
+extends ../layouts/mainLayout 
+
+
+block styles 
+  link(rel="stylesheet" href="/css/forms.css")
+  link(rel="stylesheet" href="/css/product.css")
+
+block content
+  main
+    if errorMessage
+      .user-message.user-message-error
+        = errorMessage
+    .signUp-form
+      form(action="/signUp" method="POST" novalidate)
+        .form-control
+          label(for="username") Username 
+          input(type="text" name="username" id="username" value=(oldInput.username))
+        .form-control
+          label(for="email") E-mail 
+          input(type="text" name="email" id="email" value=(oldInput.email))
+        .form-control
+          label(for="password") Password
+          input(type="password" name="password" id="password")
+        .form-control 
+          label(for="confirmPassowrd") Confirm Password
+          input(type="password" name="confirmPassword" id="confirmPassowrd")
+        button.btn(type="submit") Sign Up
+        input(type="hidden" name="_csrf" value=(csrfToken))
+

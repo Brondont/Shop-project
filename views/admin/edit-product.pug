@@ -1,0 +1,28 @@
+extends ../layouts/mainLayout.pug 
+
+block styles
+  link(rel="stylesheet" href="/css/forms.css")
+  link(rel="stylesheet" href="/css/product.css")
+
+block content
+  main
+    if errorMessage 
+        .user-message.user-message-error
+          = errorMessage
+    .grid
+      form.product-form(action="/admin/edit-product" method="POST" enctype="multipart/form-data")
+        .form-control
+          label(for="title") Title 
+          input(type="text" name="title" id="title" value=(oldInput.title ? oldInput.title : product.title))
+        .form-control
+          label(for="image") Image
+          input(type="file" name="image" id="image")
+        .form-control
+          label(for="price") Price 
+          input(type="number" name="price" id="price" step="0.01" value=(oldInput.price ? oldInput.price : product.price))
+        .form-control
+          label(for="description") Description 
+          textarea(name="description" id="description" rows="5" )= oldInput.description ? oldInput.description: product.description
+        button.btn(type="submit") Finish edit
+        input(type="hidden" name="productId" value=(oldInput.id ? oldInput.id : product._id))
+        input(type="hidden" name="_csrf" value=(csrfToken))

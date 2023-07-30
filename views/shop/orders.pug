@@ -1,0 +1,20 @@
+extends ../layouts/mainLayout.pug 
+
+block styles 
+
+block content
+  main
+    if(isAuthenticated)
+      if orders.length < 1
+        h1 You have no orders !
+      else
+        ul.orders
+          each order in orders 
+              li.orders__item
+                h1 Order - # #{order._id} 
+                  a(href="/orders/" + (order._id)) Invoice
+                ul.orders__products
+                  each product in order.items 
+                    li.orders__products-item #{product.productId.title}
+    else 
+      h1 You are not logged in!

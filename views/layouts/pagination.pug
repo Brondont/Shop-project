@@ -1,0 +1,10 @@
+section.pagination 
+  a(href="?page=1" class=(currentPage === 1 ? "active" : ""))= 1 
+  if currentPage - 1 > 1 
+    a(href="?page=" + (currentPage - 1))= currentPage - 1
+  if currentPage != totalPages
+    if currentPage !== 1 
+      a.active(href="?page=" + currentPage)= currentPage
+    a(href="?page=" + (currentPage + 1))= currentPage + 1 
+  else 
+    a.active(href=("?page=" + currentPage ))= currentPage 

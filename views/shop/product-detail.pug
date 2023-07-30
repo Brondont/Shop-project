@@ -1,0 +1,20 @@
+extends ../layouts/mainLayout.pug
+
+block styles 
+  link(rel="stylesheet" href="/css/product.css")
+
+block content
+  main.centered
+    h1 #{product.title}
+    hr
+    header.card__header
+      .card__image
+        img.image(src="/" + (product.imagePath) width="300" height="400" alt=(product.title)) 
+      .card__content
+        h2.product__price $#{product.price}
+        p #{product.description}
+        if(isAuthenticated)
+          form(action="/cart" method="POST")
+            button.btn Add To Cart
+            input(type="hidden" name="productId" value=(product._id)) 
+            input(type="hidden" name="_csrf" value=(csrfToken))
