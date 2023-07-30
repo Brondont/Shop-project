@@ -109,3 +109,5 @@ mongoose
     console.log("Server started!");
   })
   .catch((err) => console.log(err));
+
+export default app;
