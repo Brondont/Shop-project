@@ -11,8 +11,6 @@ const { Session } = require("inspector");
 const csrf = require("csurf");
 const multer = require("multer");
 const helmet = require("helmet");
-const compression = require("compression");
-const morgan = require("morgan");
 
 const adminRoutes = require("./routers/admins");
 const authRoutes = require("./routers/auth");
@@ -49,14 +47,8 @@ const fileFilter = (req, file, cb) => {
 app.set("view engine", "pug");
 app.set("views", "views");
 
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
-
 app.use(helmet());
 app.use(compression());
-app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(cookieParser("secret"));
 app.use(express.urlencoded({ extended: false }));
