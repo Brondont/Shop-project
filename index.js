@@ -45,7 +45,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 app.set("view engine", "pug");
-app.set("views", "views");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(helmet());
 
@@ -110,4 +110,4 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-export default app;
+module.exports = app;
