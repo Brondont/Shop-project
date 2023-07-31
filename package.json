@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm install && npm run build-server",
     "build-server": "echo 'Building Server...' && npm run compile-server",
-    "compile-server": "echo 'Compiling Server...",
+    "compile-server": "echo 'Compiling Server...'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:dev": "nodemon index.js"
