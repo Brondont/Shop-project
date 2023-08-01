@@ -31,7 +31,7 @@ const csrfProtection = csrf();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, path.join(__dirname, "images"));
   },
   filename: (req, file, cb) => {
     cb(null, Math.random() + "_" + file.originalname);
