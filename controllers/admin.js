@@ -43,7 +43,7 @@ exports.postAddProduct = (req, res, next) => {
   const product = new Product({
     title: req.body.title,
     price: req.body.price,
-    imagePath: " https://shop-service-n1op.onrender.com/ " + req.file.path,
+    imagePath: req.file.path,
     description: req.body.description,
     userId: req.user,
   });
