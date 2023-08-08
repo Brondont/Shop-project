@@ -51,6 +51,7 @@ exports.getShopProducts = (req, res, next) => {
         pageTitle: "Products",
         products: products,
         path: "/products",
+        errorMessage: req.flash("invalid")[0],
         currentPage: page,
         totalPages: Math.ceil(totalProducts / ITEMS_PER_PAGE),
       });
@@ -65,10 +66,12 @@ exports.getShopProducts = (req, res, next) => {
 exports.getShopProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId)
+    .populate("userId")
     .then((product) => {
       res.render("shop/product-detail", {
         pageTitle: product.title + "'s Details",
         path: "/products",
+        errorMessage: req.flash("invalid")[0],
         product: product,
       });
     })
@@ -100,6 +103,9 @@ exports.postShopCart = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
     .then((product) => {
+      if (product.userId.toString() === req.user._id.toString()) {
+        return req.flash("invalid", "You can't order your own product!");
+      }
       return req.user.addToCart(product);
     })
     .then(() => {

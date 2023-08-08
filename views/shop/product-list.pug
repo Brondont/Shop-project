@@ -5,6 +5,9 @@ block styles
 
 block content 
   main
+    if errorMessage
+      .user-message.user-message-error
+        = errorMessage
     if products.length > 0 
       .grid
         each product in products

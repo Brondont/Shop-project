@@ -1,28 +1,11 @@
-extends ../layouts/mainLayout.pug 
+extends ../layouts/mainLayout.pug
 
-block styles
+block styles 
   link(rel="stylesheet" href="/css/product.css")
 
 block content 
-  main
-    if products.length > 0 
-      .grid
-        each product in products
-          article.card.product-item 
-            header.card__header
-              h1.product__title #{product.title}
-              .card__image
-                img(src="/" + (product.imagePath) alt=(product.title))
-              .card__content
-                h2.product__price $#{product.price}
-                p.product__description #{product.description}
-              .card__actions
-                a(href="/product/" + (product._id)).btn Details
-                if(isAuthenticated)
-                  form(action="/cart" method="POST")
-                    button.btn Add To Cart
-                    input(type="hidden" name="productId" value=(product._id)) 
-                    input(type="hidden" name="_csrf" value=(csrfToken))
-      include ../layouts/pagination.pug
-    else 
-      h1 No products available currently.
+  main.centered 
+    h1.main_page_title  Welcome to our Shop
+    header.cart__header
+      .cart__actions
+        a.btn(href="/products") Browser products

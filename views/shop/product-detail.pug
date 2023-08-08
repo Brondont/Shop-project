@@ -5,7 +5,11 @@ block styles
 
 block content
   main.centered
-    h1 #{product.title}
+    if errorMessage
+      .user-message.user-message-error
+        = errorMessage
+    h1 #{product.title} 
+    p publisher: #{product.userId.name}
     hr
     header.card__header
       .card__image
