@@ -18,7 +18,7 @@ const userRoutes = require("./routers/user");
 const errorController = require("./controllers/error");
 const User = require("./models/user");
 
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.5znihve.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const MONGODB_URI = `mongodb+srv://YesSir:Yes123@cluster0.jabt1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const app = express();
 

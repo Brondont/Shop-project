@@ -1,17 +1,6 @@
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const nodemailerMailgun = require("nodemailer-mailgun-transport");
 const { validationResult } = require("express-validator");
-
-const transporter = nodemailer.createTransport(
-  nodemailerMailgun({
-    auth: {
-      api_key: process.env.MAILGUN_APIKEY,
-      domain: process.env.MAILGUN_DOMAIN,
-    },
-  })
-);
 
 const User = require("../models/user");
 
@@ -98,12 +87,6 @@ exports.postSignUp = (req, res, next) => {
       return user.save();
     })
     .then(() => {
-      transporter.sendMail({
-        from: "shop@node-complete.com",
-        to: req.body.email,
-        subject: "SignUp Succesful",
-        html: "<h1> Congratulations you are now signed up! </h1>",
-      });
       return res.redirect("/login");
     })
     .catch((err) => {
@@ -135,26 +118,7 @@ exports.postReset = (req, res, next) => {
       }
       user.resetToken = Token;
       user.resetTokenLife = Date.now() + 360000;
-      return user
-        .save()
-        .then(() => {
-          transporter.sendMail({
-            to: req.body.email,
-            from: "shop@node-complete.com",
-            subject: "Password Reset",
-            html: `
-          <p> You have made a request to reset your password </p>
-          <p> click <a href="http://localhost:3000/reset/${Token}"> Here </a> to continue </p>
-          `,
-          });
-          req.flash("success", "An email has been sent with details.");
           return res.redirect("/login");
-        })
-        .catch((err) => {
-          const error = new Error(err);
-          error.http = 500;
-          return next(error);
-        });
     });
   });
 };
